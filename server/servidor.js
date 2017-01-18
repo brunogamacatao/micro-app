@@ -52,6 +52,14 @@ Servidor.prototype.iniciaWebpack = function() {
 
   this.app.use(webpackDev);
   this.app.use(require('webpack-hot-middleware')(compiler));
+
+  // Código que será executado quando a inicializaçõa tiver concluído
+  webpackDev.waitUntilValid(function(){
+    // Após a inicialização, abrir a aplicação em um navegador
+    const url = 'http://localhost:3000';
+    console.log('Servidor executando em:', url);
+    require('open')(url);
+  });
 };
 
 /**
@@ -70,9 +78,7 @@ Servidor.prototype.start = function() {
    */
   this.server.listen(this.port);
   this.server.on('error', this.onError.bind(this));
-  this.server.on('listening', this.onListening.bind(this));
 };
-
 
 /**
  * Função executada sempre que um evento HTTP do tipo 'error' for lançado.
@@ -99,13 +105,6 @@ Servidor.prototype.onError = function(error) {
     default:
       throw error;
   }
-};
-
-/**
- * Função executada quando o servidor estiver no ar e esperando por conexões.
- */
-Servidor.prototype.onListening = function() {
-  console.log('Servidor executando em: ', 'http://localhost:' + this.port);
 };
 
 module.exports = Servidor;
