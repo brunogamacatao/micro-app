@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --watch server server/index.js",
+    "start": "webpack-dashboard -- nodemon --watch server server/index.js",
     "build": "webpack --progress --colors --config webpack.config.js"
   },
   "dependencies": {
@@ -39,6 +39,7 @@
     "path": "^0.12.7",
     "serve-favicon": "^2.3.2",
     "webpack": "^2.2.0-rc.4",
+    "webpack-dashboard": "^0.2.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   }

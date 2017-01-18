@@ -38,16 +38,16 @@ Servidor.prototype.normalizePort = function(val) {
 Servidor.prototype.iniciaWebpack = function() {
   var webpack = require('webpack');
   var config = require('../webpack.config.dev');
+  var DashboardPlugin = require('webpack-dashboard/plugin');
 
   var compiler = webpack(config);
+
+  // Conecta o webpack com o dashboard plugin
+  compiler.apply(new DashboardPlugin());
 
   var webpackDev = require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
-  });
-
-  webpackDev.waitUntilValid(function(){
-    console.log('BLA');
   });
 
   this.app.use(webpackDev);
