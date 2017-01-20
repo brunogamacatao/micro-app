@@ -1,4 +1,5 @@
 var http = require('http');
+var path = require('path');
 
 /**
  * Criação do servidor HTTP que irá executar a aplicação.
@@ -46,8 +47,10 @@ Servidor.prototype.iniciaWebpack = function() {
   compiler.apply(new DashboardPlugin());
 
   var webpackDev = require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
+    publicPath: config.output.publicPath,
+    hot: true,
+    historyApiFallback: true,
+    stats: { colors: true }
   });
 
   this.app.use(webpackDev);
@@ -56,9 +59,23 @@ Servidor.prototype.iniciaWebpack = function() {
   // Código que será executado quando a inicializaçõa tiver concluído
   webpackDev.waitUntilValid(function(){
     // Após a inicialização, abrir a aplicação em um navegador
-    const url = 'http://localhost:3000';
+    const url = 'http://localhost:3000/index.html';
     console.log('Servidor executando em:', url);
     require('open')(url);
+  });
+
+  // Hack para possibilitar trabalhar com o HTMLPlugin do webpack em memória
+  this.app.use('*', function (req, res, next) {
+    var filename = path.join(compiler.outputPath, 'index.html');
+    compiler.outputFileSystem.readFile(filename, function(err, result){
+      if (err) {
+        return next(err);
+      }
+
+      res.set('content-type','text/html');
+      res.send(result);
+      res.end();
+    });
   });
 };
 

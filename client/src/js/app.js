@@ -1,11 +1,12 @@
 import LiveReload from './util/livereload';
 import angular from 'angular';
+import css from '../css/style.css';
 
 // Inicia o live reload (sempre que o código mudar, o browser é recarregado)
 LiveReload.start();
 
-var app = angular.module('microApp', []);
+const app = angular.module('microApp', []);
 
 app.controller('MainCtrl', ['$scope', function($scope){
-  $scope.test = 'Hello world!';
+  $scope.test = 'Hello World !';
 }]);

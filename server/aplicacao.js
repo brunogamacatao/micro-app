@@ -13,10 +13,6 @@ var constantes   = require('./config/constantes');
 var Aplicacao = function() {
   this.app = express();
 
-  // view engine setup
-  this.app.set('views', path.join(__dirname, constantes.VIEWS_PATH));
-  this.app.set('view engine', constantes.VIEW_ENGINE);
-
   this.setupMiddleware();
   this.setupLiveReload();
 };
@@ -51,8 +47,8 @@ Aplicacao.prototype.setupMiddleware = function() {
   this.setupRoutes();
 
   // Caso nenhuma rota atenda a requisição, as funções de erro são executadas
-  this.app.use(this.pageForFoundErrorHandler);
-  this.app.use(this.generalErrorHandler);
+  this.app.use(this.pageForFoundErrorHandler.bind(this));
+  this.app.use(this.generalErrorHandler.bind(this));
 };
 
 /**
@@ -66,8 +62,8 @@ Aplicacao.prototype.setupLiveReload = function() {
   // This is different form http.createServer() or app.createServer()
   var reloadServer = livereload.createServer();
 
-  reloadServer.config.exts.push('ejs');  // Enable live reload for ejs files
-  reloadServer.watch(__dirname);  // Enable watch on complete app folder
+  reloadServer.config.exts.push('html');  // Enable live reload for html files
+  reloadServer.config.exts.push('css');  // Enable live reload for html files
 
   // You can also enable watch on multiple folders:
   reloadServer.watch([__dirname + '/' + constantes.STATICS_SRC_PATH]);
@@ -89,7 +85,7 @@ Aplicacao.prototype.generalErrorHandler = function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');  
+  res.json({error: err, message: err.message, stack: err.stack});  
 };
 
 module.exports = Aplicacao;
