@@ -1,1 +1,18 @@
-<h1>Área do pesquisador</h1>
+<div layout="row" layout-fill>
+  <div layout="column" flex>
+    <md-toolbar layout="row" layout-align="center center" ng-controller="PesquisadorToolbarController">
+      <div class="md-toolbar-tools">
+        <h2> 
+          <span>IPESQ Pesquisador - Menu Principal</span>
+        </h2>
+      </div>
+      <span flex></span>
+      <md-button aria-label="Favorite" ng-click="sair()">
+        <i class="material-icons">&#xE879;</i> Sair
+      </md-button>
+    </md-toolbar>
+    <md-content flex class="md-padding page-content">
+      <div ui-view></div>
+    </md-content>
+  </div>
+</div>

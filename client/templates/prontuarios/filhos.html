@@ -1,0 +1,23 @@
+<h1>Filhos</h1>
+<div class="table-responsive-vertical md-whiteframe-z1">
+    <table id="table" class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Último Acomp.</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="data in tableData track by $index" ng-click="visualizar()">
+            <td data-title="Nome">{{data.nome}}</td>
+            <td data-title="Idade">{{data.idade}}</td>
+            <td data-title="Último Acomp">{{data.ultimoAcomp}}</td>
+            <td data-title="">
+                <i class="material-icons">&#xE8B6;</i> Visualizar
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

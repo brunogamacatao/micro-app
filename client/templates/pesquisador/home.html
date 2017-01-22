@@ -1,0 +1,29 @@
+<div flex ng-cloak>
+  <md-grid-list
+        md-cols="1" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="4"
+        md-row-height-gt-md="1:1" md-row-height="4:3"
+        md-gutter="8px" md-gutter-gt-sm="40px">
+
+    <md-grid-tile></md-grid-tile>
+
+    <md-grid-tile class="md-whiteframe-6dp" ng-click="novoProntuario()">
+
+      <img src="/img/clipboard.png"/>
+
+      <md-grid-tile-footer layout="row" layout-align="center center">
+        <h2><i class="material-icons">&#xE85D;</i> Novo Prontuário</h2>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+
+    <md-grid-tile class="md-whiteframe-6dp" ng-click="pesquisarProntuarios()">
+      <img src="/img/search.png"/>
+      
+      <md-grid-tile-footer layout="row" layout-align="center center">
+        <h2><i class="material-icons">&#xE8B6;</i> Localizar Prontuário</h2>
+      </md-grid-tile-footer>
+    </md-grid-tile>
+
+    <md-grid-tile></md-grid-tile>
+
+  </md-grid-list>
+</div>

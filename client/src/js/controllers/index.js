@@ -160,3 +160,110 @@ controllers.controller('MemoryController', ['$scope', function($scope) {
     }
   };
 }]);
+
+controllers.controller('PesquisadorToolbarController', ['$scope', '$state', function($scope, $state) {
+  $scope.sair = function() {
+    $state.go('index');
+  };
+}]);
+
+controllers.controller('PesquisadorController', ['$scope', '$state', function($scope, $state) {
+  $scope.novoProntuario = function() {
+    $state.go('pesquisador.prontuario');
+  };
+
+  $scope.pesquisarProntuarios = function() {
+    $state.go('pesquisador.prontuarios');
+  };
+}]);
+
+controllers.controller('ProntuariosController', ['$scope', '$state', function($scope, $state) {
+  $scope.tableData = [
+    {
+      id: 'PBCG0001',
+      mae: 'Maria da Silva',
+      filhos: 2
+    },
+    {
+      id: 'PBCG0002',
+      mae: 'Neide Oliveira',
+      filhos: 1
+    },
+    {
+      id: 'PBCG0003',
+      mae: 'Sílvia Braz',
+      filhos: 3
+    },
+    {
+      id: 'PBJP0001',
+      mae: 'Luíza Santos',
+      filhos: 1
+    },
+    {
+      id: 'PBCZ0001',
+      mae: 'Helena Barbosa',
+      filhos: 1
+    },
+    {
+      id: 'PBCG0004',
+      mae: 'Maria do Patrocínio',
+      filhos: 1
+    },
+    {
+      id: 'PBCG0005',
+      mae: 'Ofélia Cavalcanti',
+      filhos: 2
+    },
+    {
+      id: 'PBCG0006',
+      mae: 'Marina Aparecida',
+      filhos: 1
+    },
+    {
+      id: 'PBCG0007',
+      mae: 'Ana Gouveia',
+      filhos: 3
+    },
+    {
+      id: 'PBCG0008',
+      mae: 'Emanuela da Silva',
+      filhos: 1
+    }
+  ];
+
+  $scope.visualizar = function() {
+    $state.go('pesquisador.prontuario');
+  };
+}]);
+
+controllers.controller('ProntuarioController', ['$scope', '$state', function($scope, $state) {
+  $scope.dadosDaMae = function() {
+    $state.go('pesquisador.mae');
+  };
+
+  $scope.dadosDosFilhos = function() {
+    $state.go('pesquisador.filhos');
+  };
+}]);
+
+controllers.controller('MaeController', ['$scope', '$state', function($scope, $state) {
+
+}]);
+
+controllers.controller('FilhosController', ['$scope', '$state', function($scope, $state) {
+  $scope.tableData = [
+    {
+      nome: 'Sandro Cavanlcanti',
+      idade: '6 meses',
+      ultimoAcomp: '15/01/2017'
+    }
+  ];
+
+  $scope.visualizar = function() {
+    $state.go('pesquisador.filho');
+  };  
+}]);
+
+controllers.controller('FilhoController', ['$scope', '$state', function($scope, $state) {
+
+}]);

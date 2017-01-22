@@ -1,0 +1,54 @@
+<div>
+  <div>
+    <h2>Prontuário</h2>
+    <p>
+      <b>Número:</b> PBCGPBCG0001
+    </p>
+    <p>
+      <b>Cadastro feito em:</b> 15/10/2016 - 
+      <b>Última atualização:</b> 22/01/2017
+    </p>
+    <p>
+      <b>Serviço de saúde:</b> Hospital Público
+      <b>Município:</b> Campina Grande
+      <b>Identificação:</b> ISEA
+    </p>
+    <p>
+      <md-button class="md-raised md-primary">Editar</md-button>
+      <md-button class="md-raised md-primary">Fechamento do Caso</md-button>
+    </p>
+  </div>
+
+  <hr/>
+
+  <div flex ng-cloak>
+    <h2>Outras Ações</h2>
+    <md-grid-list
+          md-cols="1" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="4"
+          md-row-height-gt-md="1:1" md-row-height="4:3"
+          md-gutter="8px" md-gutter-gt-sm="40px">
+
+      <md-grid-tile></md-grid-tile>
+
+      <md-grid-tile class="md-whiteframe-6dp" ng-click="dadosDaMae()">
+
+        <img src="/img/mother.png"/>
+
+        <md-grid-tile-footer layout="row" layout-align="center center">
+          <h2><i class="material-icons">&#xE85D;</i> Dados da Mãe</h2>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+
+      <md-grid-tile class="md-whiteframe-6dp" ng-click="dadosDosFilhos()">
+        <img src="/img/baby.png"/>
+        
+        <md-grid-tile-footer layout="row" layout-align="center center">
+          <h2><i class="material-icons">&#xE8B6;</i> Dados dos Filhos</h2>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+
+      <md-grid-tile></md-grid-tile>
+
+    </md-grid-list>
+  </div>
+</div>

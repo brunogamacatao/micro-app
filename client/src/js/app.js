@@ -51,8 +51,39 @@ app.config(
           }
         })
         .state('pesquisador', {
-          url: '/',
-          templateUrl: 'pesquisador/index.html'
+          url: '/pesquisador',
+          templateUrl: 'pesquisador/index.html',
+          abstract: true
+        })
+        .state('pesquisador.home', {
+          url: '/home',
+          templateUrl: 'pesquisador/home.html',
+          controller: 'PesquisadorController',
+        })
+        .state('pesquisador.prontuarios', {
+          url: '/prontuarios',
+          templateUrl: 'prontuarios/index.html',
+          controller: 'ProntuariosController',
+        })
+        .state('pesquisador.prontuario', {
+          url: '/prontuario',
+          templateUrl: 'prontuarios/geral.html',
+          controller: 'ProntuarioController',
+        })
+        .state('pesquisador.mae', {
+          url: '/mae',
+          templateUrl: 'prontuarios/mae.html',
+          controller: 'MaeController',
+        })
+        .state('pesquisador.filhos', {
+          url: '/filhos',
+          templateUrl: 'prontuarios/filhos.html',
+          controller: 'FilhosController',
+        })
+        .state('pesquisador.filho', {
+          url: '/filho',
+          templateUrl: 'prontuarios/filho.html',
+          controller: 'FilhoController',
         });
 
       $urlRouterProvider.otherwise('/');

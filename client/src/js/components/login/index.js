@@ -10,7 +10,7 @@ const installComponent = function(app) {
         if ($scope.user.login === 'admin') {
           $state.go('admin.dashboard');
         } else {
-          $state.go('pesquisador');
+          $state.go('pesquisador.home');
         }
       };
     }]
