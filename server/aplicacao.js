@@ -14,7 +14,7 @@ var Aplicacao = function() {
   this.app = express();
 
   this.setupMiddleware();
-  //this.setupLiveReload();
+  this.setupLiveReload();
 };
 
 /**
@@ -23,8 +23,8 @@ var Aplicacao = function() {
 Aplicacao.prototype.setupRoutes = function() {
   // Rotas
   //this.app.use('/', require('./routes/index'));
-  // this.app.use('/posts', require('./routes/posts'));
-  // this.app.use('/users', require('./routes/users'));
+  this.app.use('/posts', require('./routes/posts'));
+  this.app.use('/users', require('./routes/users'));
 };
 
 /**
