@@ -3,5 +3,6 @@ module.exports = {
   VIEW_ENGINE: 'ejs',
   VIEWS_PATH: '../client/dist',
   STATICS_PATH: '../client/dist',
-  STATICS_SRC_PATH: '../client/src'
+  STATICS_SRC_PATH: '../client/src',
+  TEMPLATES_PATH: '../client/templates'
 };

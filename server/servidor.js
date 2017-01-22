@@ -59,7 +59,7 @@ Servidor.prototype.iniciaWebpack = function() {
   // Código que será executado quando a inicializaçõa tiver concluído
   webpackDev.waitUntilValid(function(){
     // Após a inicialização, abrir a aplicação em um navegador
-    const url = 'http://localhost:3000/index.html';
+    const url = 'http://localhost:3000';
     console.log('Servidor executando em:', url);
     require('open')(url);
   });

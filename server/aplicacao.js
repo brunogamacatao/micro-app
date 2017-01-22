@@ -22,7 +22,7 @@ var Aplicacao = function() {
  */
 Aplicacao.prototype.setupRoutes = function() {
   // Rotas
-  this.app.use('/', require('./routes/index'));
+  //this.app.use('/', require('./routes/index'));
   this.app.use('/posts', require('./routes/posts'));
   this.app.use('/users', require('./routes/users'));
 };
@@ -42,6 +42,7 @@ Aplicacao.prototype.setupMiddleware = function() {
   this.app.use(bodyParser.urlencoded({ extended: false }));
   this.app.use(cookieParser());
   this.app.use(express.static(path.join(__dirname, constantes.STATICS_PATH)));
+  this.app.use(express.static(path.join(__dirname, constantes.TEMPLATES_PATH)));
 
   // Em seguida, são chamadas as rotas da aplicação
   this.setupRoutes();

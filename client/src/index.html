@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html ng-app='microApp'>
+<html>
   <head>
     <title>Hello World</title>
   </head>
-  <body ng-controller="MainCtrl">
-    <h1>Hello World</h1>
-    <p>Sejam todos bem vindos</p>
-    <p>Angular Funciona {{2 + 2}}</p>
-    <p>$scope.test = {{test}}</p>
+  <body ng-app="ipesq" ng-cloak>
+    <div ng-view >
+      <!-- Aqui virão os templates providos pelo ng-route -->
+    </div>
   </body>
 </html>
