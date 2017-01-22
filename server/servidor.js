@@ -83,7 +83,7 @@ Servidor.prototype.iniciaWebpack = function() {
  * Método reponsável por iniciar o servidor
  */
 Servidor.prototype.start = function() {
-  this.iniciaWebpack();
+//  this.iniciaWebpack();
 
   this.app.set('port', this.port);
 
