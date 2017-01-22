@@ -1,0 +1,9 @@
+.login-form {
+  md-card {
+    padding: 0!important;
+
+    md-card-title {
+      background-color: blue;
+    }
+  }
+}

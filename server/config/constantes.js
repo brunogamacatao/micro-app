@@ -4,5 +4,6 @@ module.exports = {
   VIEWS_PATH: '../client/dist',
   STATICS_PATH: '../client/dist',
   STATICS_SRC_PATH: '../client/src',
-  TEMPLATES_PATH: '../client/templates'
+  TEMPLATES_PATH: '../client/templates',
+  ASSETS_PATH: '../client/assets'
 };

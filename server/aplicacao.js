@@ -43,6 +43,7 @@ Aplicacao.prototype.setupMiddleware = function() {
   this.app.use(cookieParser());
   this.app.use(express.static(path.join(__dirname, constantes.STATICS_PATH)));
   this.app.use(express.static(path.join(__dirname, constantes.TEMPLATES_PATH)));
+  this.app.use(express.static(path.join(__dirname, constantes.ASSETS_PATH)));
 
   // Em seguida, são chamadas as rotas da aplicação
   this.setupRoutes();
