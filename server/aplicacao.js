@@ -14,7 +14,7 @@ var Aplicacao = function() {
   this.app = express();
 
   this.setupMiddleware();
-  this.setupLiveReload();
+  //this.setupLiveReload();
 };
 
 /**
