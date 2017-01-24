@@ -46,7 +46,7 @@ Aplicacao.prototype.setupMiddleware = function() {
   this.app.use(express.static(path.join(__dirname, constantes.ASSETS_PATH)));
 
   // Em seguida, são chamadas as rotas da aplicação
-  this.setupRoutes();
+  // this.setupRoutes();
 
   // Caso nenhuma rota atenda a requisição, as funções de erro são executadas
   this.app.use(this.pageForFoundErrorHandler.bind(this));

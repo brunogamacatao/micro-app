@@ -1,0 +1,133 @@
+<style>
+  .ipesq_form fieldset legend, .ipesq_form fieldset label {
+    font-weight: bold;
+  }
+
+  .ipesq_form fieldset p {
+    display: table;
+  }
+
+  .ipesq_form fieldset p label {
+    display: table-cell;
+    width: 200px;
+  }
+</style>
+
+<form action="" class="ipesq_form">
+  <fieldset>
+    <legend>Dados do Serviço de Saúde</legend>
+    <p>
+      <label>Tipo:</label>
+      <input type="radio" name="tipo" ng-model='model.servicoDeSaude.tipo' value="hospital_publico" > Hospital Público
+      <input type="radio" name="tipo" ng-model='model.servicoDeSaude.tipo' value="hospital_particular"> Hospital Particular
+      <input type="radio" name="tipo" ng-model='model.servicoDeSaude.tipo' value="hospital_filantropico"> Hospital Filantrópico
+      <input type="radio" name="tipo" ng-model='model.servicoDeSaude.tipo' value="domicilio"> Domicílio
+      <input type="radio" name="tipo" ng-model='model.servicoDeSaude.tipo' value="outros"> Outros
+    </p>
+    <p>
+      <label>Serviço de saúde:</label>
+      <span><input type="text" ng-model='model.servicoDeSaude.nome'></span>
+    </p>
+    <p>
+      <label>Município:</label>
+      <input type="text" ng-model='model.servicoDeSaude.municipio'>
+    </p>
+  </fieldset>
+  <fieldset>
+    <legend>Dados da Mãe</legend>
+    <p>
+      <label>Nome:</label>
+      <input type="text" ng-model='model.mae.nome'>
+    </p>
+    <p>
+      <label>Data de nascimento:</label>
+      <input type="date" ng-model='model.mae.dataDeNascimento'>
+    </p>
+    <p>
+      <label>Raça/cor:</label>
+      <input type="radio" name="tipo" ng-model='model.mae.raca' value="branca"> Branca
+      <input type="radio" name="tipo" ng-model='model.mae.raca' value="preta"> Preta
+      <input type="radio" name="tipo" ng-model='model.mae.raca' value="amarela"> Amarela
+      <input type="radio" name="tipo" ng-model='model.mae.raca' value="parda"> Parda
+      <input type="radio" name="tipo" ng-model='model.mae.raca' value="indigena"> Indígena
+      <input type="radio" name="tipo" ng-model='model.mae.raca' value="ignorado"> Ignorado
+    </p>
+    <p>
+      <label>Escolaridade</label>
+      <input type="radio" name="tipo" ng-model='model.mae.escolaridade' value="sem"> Sem escolaridade
+      <input type="radio" name="tipo" ng-model='model.mae.escolaridade' value="fundamental1"> Fundamental I
+      <input type="radio" name="tipo" ng-model='model.mae.escolaridade' value="fundamental2"> Fundamental II
+      <input type="radio" name="tipo" ng-model='model.mae.escolaridade' value="medio"> Médio
+      <input type="radio" name="tipo" ng-model='model.mae.escolaridade' value="superior"> Superior
+      <input type="radio" name="tipo" ng-model='model.mae.escolaridade' value="ignorado"> Ignorado
+    </p>
+    <p>
+      <label>Estado Civil</label>
+      <input type="radio" name="tipo" ng-model='model.mae.estadoCivil' value="solteira"> Solteira
+      <input type="radio" name="tipo" ng-model='model.mae.estadoCivil' value="casada"> Casada
+      <input type="radio" name="tipo" ng-model='model.mae.estadoCivil' value="viuva"> Viúva
+      <input type="radio" name="tipo" ng-model='model.mae.estadoCivil' value="separada"> Separada/Divorciada
+      <input type="radio" name="tipo" ng-model='model.mae.estadoCivil' value="uniao_estavel"> União Estável
+      <input type="radio" name="tipo" ng-model='model.mae.estadoCivil' value="ignorado"> Ignorado
+    </p>
+    <p>
+      <label>Ocupação:</label>
+      <input type="text" ng-model='model.mae.ocupacao'>
+    </p>
+    <p>
+      <label>Número de pessoas que moram na sua casa:</label>
+      <input type="number" min="1" ng-model='model.mae.numeroDePessoasNaCasa'>
+    </p>
+    <p>
+      <label>Renda familiar mensal:</label>
+      <input type="number" min="0" step="0.01" ng-model='model.mae.rendaFamiliar'>
+    </p>
+
+    <fieldset>
+      <legend>Endereço Atual</legend>
+      <p>
+        <label style="display: inline;">Estado:</label>
+        &nbsp;
+        <select ng-model='model.endereco.estado'>
+          <option>Selecione</option>
+          <option value="pb">Paraíba</option>
+          <option value="pe">Pernambuco</option>
+          <option value="rn">Rio Grande do Norte</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label style="display: inline;">Município:</label>
+        &nbsp;
+        <select ng-model='model.endereco.municipio'>
+          <option>Selecione</option>
+          <option value="1">Campina Grande</option>
+          <option value="2">João Pessoa</option>
+          <option value="3">Patos</option>
+          <option value="4">São José da Lagoa Tapada</option>
+        </select>
+      </p>
+      <p>
+        <label style="display: inline;">Logradouro:</label>
+        &nbsp;
+        <input style="width: 400px;" type="text" ng-model='model.endereco.logradouro'>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label style="display: inline;">Número:</label>
+        &nbsp;
+        <input type="text" ng-model='model.endereco.numero'>
+      </p>
+      <p>
+        <label style="display: inline;">Bairro:</label>
+        &nbsp;
+        <input style="width: 400px;" type="text" ng-model='model.endereco.bairro'>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label style="display: inline;">Telefone:</label>
+        &nbsp;
+        <input type="text" ng-model='model.endereco.telefone'>
+      </p>
+    </fieldset>
+  </fieldset>
+  <md-content>
+    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button class="md-raised md-primary" ng-click="cadastrar()">{{labelBotaoSalvar}}</md-button>
+    </section>
+  </md-content>
+</form>

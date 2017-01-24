@@ -161,7 +161,11 @@ controllers.controller('MemoryController', ['$scope', function($scope) {
   };
 }]);
 
-controllers.controller('PesquisadorToolbarController', ['$scope', '$state', function($scope, $state) {
+controllers.controller('PesquisadorToolbarController', ['$scope', '$state', '$window', function($scope, $state, $window) {
+  $scope.voltar = function() {
+    $window.history.back();
+  };
+
   $scope.sair = function() {
     $state.go('index');
   };
@@ -169,11 +173,11 @@ controllers.controller('PesquisadorToolbarController', ['$scope', '$state', func
 
 controllers.controller('PesquisadorController', ['$scope', '$state', function($scope, $state) {
   $scope.novoProntuario = function() {
-    $state.go('pesquisador.prontuario');
+    $state.go('pesquisador.prontuarios.novo');
   };
 
   $scope.pesquisarProntuarios = function() {
-    $state.go('pesquisador.prontuarios');
+    $state.go('pesquisador.prontuarios.listar');
   };
 }]);
 
@@ -232,17 +236,37 @@ controllers.controller('ProntuariosController', ['$scope', '$state', function($s
   ];
 
   $scope.visualizar = function() {
-    $state.go('pesquisador.prontuario');
+    $state.go('pesquisador.prontuarios.detalhe');
   };
 }]);
 
-controllers.controller('ProntuarioController', ['$scope', '$state', function($scope, $state) {
+controllers.controller('ProntuarioController', ['$scope', '$state', '$mdDialog', function($scope, $state, $mdDialog) {
+  $scope.editar = function() {
+    $state.go('pesquisador.prontuarios.editar');
+  };
+
+  $scope.fechamento = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+          .title('Fechamento do Caso')
+          .textContent('Tem certeza que deseja fechar esse caso ?')
+          .targetEvent(ev)
+          .ok('Sim')
+          .cancel('Não');
+
+    $mdDialog.show(confirm).then(function() {
+      $state.go('pesquisador.home');
+    }, function() {
+      $scope.status = 'You decided to keep your debt.';
+    });
+  };
+
   $scope.dadosDaMae = function() {
-    $state.go('pesquisador.mae');
+    $state.go('pesquisador.prontuarios.mae');
   };
 
   $scope.dadosDosFilhos = function() {
-    $state.go('pesquisador.filhos');
+    $state.go('pesquisador.prontuarios.filhos');
   };
 }]);
 
@@ -260,10 +284,51 @@ controllers.controller('FilhosController', ['$scope', '$state', function($scope,
   ];
 
   $scope.visualizar = function() {
-    $state.go('pesquisador.filho');
+    $state.go('pesquisador.prontuarios.filho');
   };  
 }]);
 
 controllers.controller('FilhoController', ['$scope', '$state', function($scope, $state) {
 
+}]);
+
+controllers.controller('ProntuarioNovoController', ['$scope', '$state', function($scope, $state) {
+  $scope.labelBotaoSalvar = 'Cadastrar';
+
+  $scope.cadastrar = function() {
+    $state.go('pesquisador.prontuarios.detalhe');
+  };
+}]);
+
+controllers.controller('ProntuarioEditarController', ['$scope', '$state', function($scope, $state) {
+  $scope.labelBotaoSalvar = 'Atualizar';
+  $scope.model = {
+    servicoDeSaude: {
+      tipo: 'hospital_publico',
+      nome: 'ISEA',
+      municipio: 'Campina Grande'
+    },
+    mae: {
+      nome: 'Ofélia Cavalcanti',
+      dataDeNascimento: new Date('1984-09-25'),
+      raca: 'parda',
+      escolaridade: 'medio',
+      estadoCivil: 'casada',
+      ocupacao: 'Professora',
+      numeroDePessoasNaCasa: 4,
+      rendaFamiliar: 2500
+    },
+    endereco: {
+      estado: 'pb',
+      municipio: '1',
+      logradouro: 'Rua Antônio Vieira da Rocha',
+      numero: '624',
+      bairro: 'Bodocongó',
+      telefone: '(83) 3333-2008'
+    }
+  };
+
+  $scope.cadastrar = function() {
+    $state.go('pesquisador.prontuarios.detalhe');
+  };
 }]);

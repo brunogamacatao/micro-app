@@ -1,5 +1,6 @@
-var http = require('http');
-var path = require('path');
+var http    = require('http');
+var path    = require('path');
+var process = require('process');
 
 /**
  * Criação do servidor HTTP que irá executar a aplicação.
@@ -83,7 +84,12 @@ Servidor.prototype.iniciaWebpack = function() {
  * Método reponsável por iniciar o servidor
  */
 Servidor.prototype.start = function() {
-  this.iniciaWebpack();
+  var env = process.argv[2] || 'dev';
+
+  if (env === 'dev') {
+    // Em desenvolvimento, utilizar o webpack hot deployment
+    this.iniciaWebpack();
+  }
 
   this.app.set('port', this.port);
 
