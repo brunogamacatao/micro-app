@@ -14,7 +14,15 @@ var Aplicacao = function() {
   this.app = express();
 
   this.setupMiddleware();
-  this.setupLiveReload();
+
+  if (this.inDevelopment()) {
+    this.setupLiveReload();
+  }
+};
+
+Aplicacao.prototype.inDevelopment = function() {
+  var env = process.argv[2] || 'dev';
+  return env === 'dev';
 };
 
 /**

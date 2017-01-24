@@ -80,13 +80,16 @@ Servidor.prototype.iniciaWebpack = function() {
   });
 };
 
+Servidor.prototype.inDevelopment = function() {
+  var env = process.argv[2] || 'dev';
+  return env === 'dev';
+};
+
 /**
  * Método reponsável por iniciar o servidor
  */
 Servidor.prototype.start = function() {
-  var env = process.argv[2] || 'dev';
-
-  if (env === 'dev') {
+  if (this.inDevelopment()) {
     // Em desenvolvimento, utilizar o webpack hot deployment
     this.iniciaWebpack();
   }
