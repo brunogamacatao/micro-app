@@ -1,76 +1,118 @@
-<fieldset>
-  <legend>Outros Exames</legend>
-  <p>
-    <label>Data:</label>
-    <input type="date">
-  </p>
-  <table>
-    <tr>
-      <th>Hb(mg/dl)</th>
-      <th>Ht(%)</th>
-      <th>Leucócitos(mm3)</th>
-      <th>Bastonetes(%)</th>
-      <th>Segmentados(%)</th>
-    </tr>      
-    <tr>
-      <td><input type="number" min="0" step="0.01" ng-model='model.hb'></td>
-      <td><input type="number" min="0" step="0.01" ng-model='model.ht'></td>
-      <td><input type="number" min="0" step="0.01" ng-model='model.leucocitos'></td>
-      <td><input type="number" min="0" step="0.01" ng-model='model.bastonetes'></td>
-      <td><input type="number" min="0" step="0.01" ng-model='model.segmentados'></td>
-    </tr>
-    <tr>
-      <th>Monócitos(%)</th>
-      <th>Linfócitos(%)</th>
-      <th>Plaquetas(%)</th>
-      <th>Glicose(mg/dl)</th>
-    </tr>
-    <tr>
-      <td><input type="number" min="0" step="0.01" ng-model='model.monocitos'></td>
-      <td><input type="number" min="0" step="0.01" ng-model='model.linfocitos'></td>
-      <td><input type="number" min="0" step="0.01" ng-model='model.plaquetas'></td>
-      <td><input type="number" min="0" step="0.01" ng-model='model.glicose'></td>
-    </tr>
-  </table>
-  <p style="text-align: center">
-    <md-button class="md-raised md-primary" ng-click="adicionar()">Adicionar</md-button>
-  </p>  
-</fieldset>
+<style>
+  .tabela-exames {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .tabela-exames td {
+    text-align: center;
+  }
+</style>
+
+<md-card>
+  <md-card-content>
+    <h2>Outros Exames</h2>
+
+    <md-input-container>
+      <label>Data:</label>
+      <input type="date">
+    </md-input-container>
+
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Hb(mg/dl):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.hb'>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Ht(%):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.ht'>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Leucócitos(mm3):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.leucocitos'>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Bastonetes(%):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.bastonetes'>
+      </md-input-container>
+    </div>
+
+
+    <div layout-gt-sm="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Segmentados(%):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.segmentados'>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Monócitos(%):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.monocitos'>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Linfócitos(%):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.linfocitos'>
+      </md-input-container>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Plaquetas(%):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.plaquetas'>
+      </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+      <md-input-container class="">
+        <label>Glicose(mg/dl):</label>
+        <input type="number" min="0" step="0.01" ng-model='model.glicose'>
+      </md-input-container>
+    </div>
+
+    <p style="text-align: center">
+      <md-button class="md-raised md-primary" ng-click="adicionar()">Adicionar</md-button>
+    </p>
+  </md-card-content>
+</md-card>
+
 
 <div ng-show='exames.length > 0'>
-  <hr/>
+  <md-card>
+    <md-card-content>
+      <h2>Exames Cadastrados</h2>
 
-  <fieldset>
-    <legend>Exames Cadastrados</legend>
-    <table ng-repeat='exame in exames track by $index'>
-      <thead>
-        <tr>
-          <th>Data</th>
-          <th>Hb(mg/dl)</th>
-          <th>Ht(%)</th>
-          <th>Leucócitos(mm3)</th>
-          <th>Bastonetes(%)</th>
-          <th>Segmentados(%)</th>
-          <th>Monócitos(%)</th>
-          <th>Linfócitos(%)</th>
-          <th>Plaquetas(%)</th>
-          <th>Glicose(mg/dl)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{exame.data|date:'dd/MM/yyyy'}}</td>
-          <td>{{exame.hb}}</td>
-          <td>{{exame.ht}}</td>
-          <td>{{exame.leucocitos}}</td>
-          <td>{{exame.bastonetes}}</td>
-          <td>{{exame.segmentados}}</td>
-          <td>{{exame.monocitos}}</td>
-          <td>{{exame.linfocitos}}</td>
-          <td>{{exame.plaquetas}}</td>
-          <td>{{exame.glicose}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </fieldset>
+      <table class="tabela-exames" ng-repeat='exame in exames track by $index'>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Hb(mg/dl)</th>
+            <th>Ht(%)</th>
+            <th>Leucócitos(mm3)</th>
+            <th>Bastonetes(%)</th>
+            <th>Segmentados(%)</th>
+            <th>Monócitos(%)</th>
+            <th>Linfócitos(%)</th>
+            <th>Plaquetas(%)</th>
+            <th>Glicose(mg/dl)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{exame.data|date:'dd/MM/yyyy'}}</td>
+            <td>{{exame.hb}}</td>
+            <td>{{exame.ht}}</td>
+            <td>{{exame.leucocitos}}</td>
+            <td>{{exame.bastonetes}}</td>
+            <td>{{exame.segmentados}}</td>
+            <td>{{exame.monocitos}}</td>
+            <td>{{exame.linfocitos}}</td>
+            <td>{{exame.plaquetas}}</td>
+            <td>{{exame.glicose}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-card-content>
+  </md-card>
 </div>
