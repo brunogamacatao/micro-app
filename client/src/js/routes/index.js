@@ -28,6 +28,7 @@ function setupRoutes($stateProvider, $urlRouterProvider) {
       controller: 'PesquisadorController',
     })
     .state('pesquisador.prontuarios', {
+      url: '/prontuarios',
       templateUrl: 'pesquisador/prontuarios/index.html',
       abstract: true
     })
@@ -37,7 +38,7 @@ function setupRoutes($stateProvider, $urlRouterProvider) {
       controller: 'ProntuarioNovoController',
     })
     .state('pesquisador.prontuarios.editar', {
-      url: '/editar',
+      url: '/editar/:id',
       templateUrl: 'pesquisador/prontuarios/novo.html',
       controller: 'ProntuarioEditarController',
     })
@@ -47,9 +48,9 @@ function setupRoutes($stateProvider, $urlRouterProvider) {
       controller: 'ProntuariosController',
     })
     .state('pesquisador.prontuarios.detalhe', {
-      url: '/detalhe',
+      url: '/detalhe/:id',
       templateUrl: 'pesquisador/prontuarios/detalhe.html',
-      controller: 'ProntuarioController',
+      controller: 'ProntuarioDetalheController',
     })
     .state('pesquisador.prontuarios.mae', {
       url: '/mae',
@@ -58,13 +59,48 @@ function setupRoutes($stateProvider, $urlRouterProvider) {
     })
     .state('pesquisador.prontuarios.filhos', {
       url: '/filhos',
-      templateUrl: 'pesquisador/prontuarios/filhos.html',
-      controller: 'FilhosController',
+      abstract: true,
+      templateUrl: 'pesquisador/prontuarios/index.html'
     })
-    .state('pesquisador.prontuarios.filho', {
-      url: '/filho',
-      templateUrl: 'pesquisador/prontuarios/filho.html',
-      controller: 'FilhoController',
+    .state('pesquisador.prontuarios.filhos.listar', {
+      url: '/',
+      templateUrl: 'pesquisador/prontuarios/filhos/listar.html',
+      controller: 'FilhosListarController'
+    })
+    .state('pesquisador.prontuarios.filhos.detalhe', {
+      url: '/filho/:id',
+      templateUrl: 'pesquisador/prontuarios/filhos/detalhe.html',
+      controller: 'FilhosDetalheController'
+    })
+    .state('pesquisador.prontuarios.filhos.novo', {
+      url: '/novo',
+      templateUrl: 'pesquisador/prontuarios/filhos/novo.html',
+      controller: 'FilhosNovoController'
+    })
+    .state('pesquisador.prontuarios.filhos.editar', {
+      url: '/editar/:id',
+      templateUrl: 'pesquisador/prontuarios/filhos/novo.html',
+      controller: 'FilhosEditarController'
+    })
+    .state('pesquisador.prontuarios.filhos.exames_inespecificos', {
+      url: '/exames_inespecificos/:id',
+      templateUrl: 'pesquisador/prontuarios/filhos/exames_inespecificos.html',
+      controller: 'FilhosExamesInespecificosController'
+    })
+    .state('pesquisador.prontuarios.filhos.exames_etiologicos', {
+      url: '/exames_etiologicos/:id',
+      templateUrl: 'pesquisador/prontuarios/filhos/exames_etiologicos.html',
+      controller: 'FilhosExamesEtiologicosController'
+    })
+    .state('pesquisador.prontuarios.filhos.exames_imagem', {
+      url: '/exames_imagem/:id',
+      templateUrl: 'pesquisador/prontuarios/filhos/exames_imagem.html',
+      controller: 'FilhosExamesDeImagemController'
+    })
+    .state('pesquisador.prontuarios.filhos.exames_outros', {
+      url: '/exames_outros/:id',
+      templateUrl: 'pesquisador/prontuarios/filhos/exames_outros.html',
+      controller: 'FilhosExamesOutrosController'
     });
 
   $urlRouterProvider.otherwise('/');

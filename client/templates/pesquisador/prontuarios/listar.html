@@ -9,10 +9,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="data in tableData track by $index" ng-click="visualizar()">
+    <tr ng-repeat="data in tableData track by $index" ng-click="visualizar(data)">
       <td data-title="ID">{{data.id}}</td>
       <td data-title="Nome da Mãe">{{data.mae}}</td>
-      <td data-title="Filhos">{{data.filhos}}</td>
+      <td data-title="Filhos">{{data.filhos.length}}</td>
       <td data-title="">
         <i class="material-icons">&#xE8B6;</i> Visualizar
       </td>

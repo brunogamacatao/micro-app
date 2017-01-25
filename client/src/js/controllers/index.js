@@ -1,4 +1,5 @@
 import angular from 'angular';
+import BancoDeDados from '../dao';
 
 // Cria o módulo
 const controllers = angular.module('ipesq.controllers', []);
@@ -182,67 +183,18 @@ controllers.controller('PesquisadorController', ['$scope', '$state', function($s
 }]);
 
 controllers.controller('ProntuariosController', ['$scope', '$state', function($scope, $state) {
-  $scope.tableData = [
-    {
-      id: 'PBCG0001',
-      mae: 'Maria da Silva',
-      filhos: 2
-    },
-    {
-      id: 'PBCG0002',
-      mae: 'Neide Oliveira',
-      filhos: 1
-    },
-    {
-      id: 'PBCG0003',
-      mae: 'Sílvia Braz',
-      filhos: 3
-    },
-    {
-      id: 'PBJP0001',
-      mae: 'Luíza Santos',
-      filhos: 1
-    },
-    {
-      id: 'PBCZ0001',
-      mae: 'Helena Barbosa',
-      filhos: 1
-    },
-    {
-      id: 'PBCG0004',
-      mae: 'Maria do Patrocínio',
-      filhos: 1
-    },
-    {
-      id: 'PBCG0005',
-      mae: 'Ofélia Cavalcanti',
-      filhos: 2
-    },
-    {
-      id: 'PBCG0006',
-      mae: 'Marina Aparecida',
-      filhos: 1
-    },
-    {
-      id: 'PBCG0007',
-      mae: 'Ana Gouveia',
-      filhos: 3
-    },
-    {
-      id: 'PBCG0008',
-      mae: 'Emanuela da Silva',
-      filhos: 1
-    }
-  ];
+  $scope.tableData = BancoDeDados.dados.prontuarios;
 
-  $scope.visualizar = function() {
-    $state.go('pesquisador.prontuarios.detalhe');
+  $scope.visualizar = function(prontuario) {
+    $state.go('pesquisador.prontuarios.detalhe', {id: prontuario.id});
   };
 }]);
 
-controllers.controller('ProntuarioController', ['$scope', '$state', '$mdDialog', function($scope, $state, $mdDialog) {
+controllers.controller('ProntuarioDetalheController', ['$scope', '$state', '$stateParams', '$mdDialog', function($scope, $state, $stateParams, $mdDialog) {
+  $scope.prontuario = BancoDeDados.findProntuarioById($stateParams.id);
+
   $scope.editar = function() {
-    $state.go('pesquisador.prontuarios.editar');
+    $state.go('pesquisador.prontuarios.editar', {id: $scope.prontuario.id});
   };
 
   $scope.fechamento = function(ev) {
@@ -266,7 +218,7 @@ controllers.controller('ProntuarioController', ['$scope', '$state', '$mdDialog',
   };
 
   $scope.dadosDosFilhos = function() {
-    $state.go('pesquisador.prontuarios.filhos');
+    $state.go('pesquisador.prontuarios.filhos.listar');
   };
 }]);
 
@@ -274,22 +226,74 @@ controllers.controller('MaeController', ['$scope', '$state', function($scope, $s
 
 }]);
 
-controllers.controller('FilhosController', ['$scope', '$state', function($scope, $state) {
+controllers.controller('FilhosListarController', ['$scope', '$state', function($scope, $state) {
   $scope.tableData = [
     {
+      id: '0059',
       nome: 'Sandro Cavanlcanti',
       idade: '6 meses',
       ultimoAcomp: '15/01/2017'
     }
   ];
 
-  $scope.visualizar = function() {
-    $state.go('pesquisador.prontuarios.filho');
-  };  
+  $scope.visualizar = function(filho) {
+    $state.go('pesquisador.prontuarios.filhos.detalhe', {id: filho.id});
+  };
+
+  $scope.novo = function() {
+    $state.go('pesquisador.prontuarios.filhos.novo');
+  };
 }]);
 
-controllers.controller('FilhoController', ['$scope', '$state', function($scope, $state) {
+controllers.controller('FilhosDetalheController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+  $scope.filhoId = $stateParams.id;
 
+  $scope.editar = function() {
+    $state.go('pesquisador.prontuarios.filhos.editar', {id: $scope.filhoId});
+  };
+
+  $scope.examesInespecificos = function() {
+    $state.go('pesquisador.prontuarios.filhos.exames_inespecificos', {id: $scope.filhoId});
+  };
+
+  $scope.examesEtiologicos = function() {
+    $state.go('pesquisador.prontuarios.filhos.exames_etiologicos', {id: $scope.filhoId});
+  };
+
+  $scope.examesDeImagem = function() {
+    $state.go('pesquisador.prontuarios.filhos.exames_imagem', {id: $scope.filhoId});
+  };
+
+  $scope.outrosExames = function() {
+    $state.go('pesquisador.prontuarios.filhos.exames_outros', {id: $scope.filhoId});
+  };
+}]);
+
+controllers.controller('FilhosNovoController', ['$scope', '$state', '$window', function($scope, $state, $window) {
+  $scope.labelBotaoSalvar = 'Cadastrar';
+  $scope.model = {};
+
+  $scope.cadastrar = function() {
+    $state.go('pesquisador.prontuarios.filhos.detalhe', {id: '0059'});
+  }  
+}]);
+
+controllers.controller('FilhosEditarController', ['$scope', '$state', '$window', function($scope, $state, $window) {
+  $scope.labelBotaoSalvar = 'Atualizar';
+  $scope.model = {
+    dataDoParto: new Date('2016-12-01'),
+    sexo: 'masculino',
+    idadeGestacional: {semanas: 6, dias: 2, tipo: 'termo'},
+    gemelar: 'nao',
+    tipoDeParto: 'vaginal',
+    temDanoPerinatal: 'nao',
+    exameFisicoAoNascer: {peso: 2500, estatura: 45, perimetroCefalico: 28, perimetroToracico: 30.5, apgar1: 2, apgar5: 1, apgar10: 1},
+    temMalformacoes: 'nao'
+  };
+
+  $scope.cadastrar = function() {
+    $state.go('pesquisador.prontuarios.filhos.detalhe', {id: '0059'});
+  }
 }]);
 
 controllers.controller('ProntuarioNovoController', ['$scope', '$state', function($scope, $state) {
@@ -330,5 +334,49 @@ controllers.controller('ProntuarioEditarController', ['$scope', '$state', functi
 
   $scope.cadastrar = function() {
     $state.go('pesquisador.prontuarios.detalhe');
+  };
+}]);
+
+controllers.controller('FilhosExamesInespecificosController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+  $scope.filhoId = $stateParams.id;
+  $scope.model = {};
+  $scope.exames = [];
+
+  $scope.adicionar = function() {
+    $scope.exames.push($scope.model);
+    $scope.model = {};
+  };
+}]);
+
+controllers.controller('FilhosExamesEtiologicosController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+  $scope.filhoId = $stateParams.id;
+  $scope.model = {};
+  $scope.exames = [];
+
+  $scope.adicionar = function() {
+    $scope.exames.push($scope.model);
+    $scope.model = {};
+  };
+}]);
+
+controllers.controller('FilhosExamesDeImagemController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+  $scope.filhoId = $stateParams.id;
+  $scope.model = {};
+  $scope.exames = [];
+
+  $scope.adicionar = function() {
+    $scope.exames.push($scope.model);
+    $scope.model = {};
+  };
+}]);
+
+controllers.controller('FilhosExamesOutrosController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+  $scope.filhoId = $stateParams.id;
+  $scope.model = {};
+  $scope.exames = [];
+
+  $scope.adicionar = function() {
+    $scope.exames.push($scope.model);
+    $scope.model = {};
   };
 }]);

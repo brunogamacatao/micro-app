@@ -1,0 +1,143 @@
+<style>
+  .ipesq_form fieldset legend, .ipesq_form fieldset label {
+    font-weight: bold;
+  }
+
+  .ipesq_form fieldset p {
+    display: table;
+  }
+
+  .ipesq_form fieldset p label {
+    display: table-cell;
+    width: 200px;
+  }
+</style>
+
+<form action="" class="ipesq_form">
+  <fieldset>
+    <legend>Dados do Recém Nascido</legend>
+    <p>
+      <label>Data do parto:</label>
+      <input type="date" ng-model='model.dataDoParto'>
+    </p>
+    <p>
+      <label>Sexo:</label>
+      <input type="radio" name="sexo" ng-model='model.sexo' value="masculino" > Masculino
+      <input type="radio" name="sexo" ng-model='model.sexo' value="feminino"> Feminino
+      <input type="radio" name="sexo" ng-model='model.sexo' value="indeterminado"> Indeterminado
+    </p>
+    <p>
+      <label>Idade gestacional:</label>
+      Semanas: <input type="number" min="1" ng-model='model.idadeGestacional.semanas'> &nbsp;
+      Dias: <input type="number" min="0" ng-model='model.idadeGestacional.dias'>
+    </p>
+    <p>
+      <label>Classificação quanto a idade gestacional:</label>
+      <input type="radio" name="tipoIdadeGestacional" ng-model='model.idadeGestacional.tipo' value="pre_termo" > Pré-termo
+      <input type="radio" name="tipoIdadeGestacional" ng-model='model.idadeGestacional.tipo' value="termo"> Termo
+      <input type="radio" name="tipoIdadeGestacional" ng-model='model.idadeGestacional.tipo' value="pos_termo"> Pós-termo
+    </p>
+    <p>
+      <label>Gemelar:</label>
+      <input type="radio" name="gemelar" ng-model='model.gemelar' value="sim" > Sim
+      <input type="radio" name="gemelar" ng-model='model.gemelar' value="nao"> Não
+    </p>
+    <p ng-if='model.gemelar == "sim"'>
+      <label>Tipo gemelar:</label>
+      <input type="radio" name="tipoGemelar" ng-model='model.tipoGemelar' value="1" > 1º Gemelar
+      <input type="radio" name="tipoGemelar" ng-model='model.tipoGemelar' value="2"> 2º Gemelar
+      <input type="radio" name="tipoGemelar" ng-model='model.tipoGemelar' value="3"> 3º Gemelar
+    </p>
+    <p>
+      <label>Tipo de parto:</label>
+      <input type="radio" name="tipoDeParto" ng-model='model.tipoDeParto' value="vaginal" > Normal/Vaginal
+      <input type="radio" name="tipoDeParto" ng-model='model.tipoDeParto' value="forceps"> Fórceps
+      <input type="radio" name="tipoDeParto" ng-model='model.tipoDeParto' value="cesareo"> Cesáreo
+    </p>
+    <p>
+      <label>Ocorreu dano perinatal:</label>
+      <input type="radio" name="danoPerinatal" ng-model='model.temDanoPerinatal' value="sim" > Sim
+      <input type="radio" name="danoPerinatal" ng-model='model.temDanoPerinatal' value="nao"> Não
+    </p>
+    <p ng-if='model.temDanoPerinatal == "sim"'>
+      <label>Dano perinatal:</label>
+      <input type="radio" name="danoPerinatal" ng-model='model.danoPerinatal' value="anoxico" > Anóxico
+      <input type="radio" name="danoPerinatal" ng-model='model.danoPerinatal' value="isquemico"> Isquêmico
+      <input type="radio" name="danoPerinatal" ng-model='model.danoPerinatal' value="hemorragico"> Hemorrágico      
+      <input type="radio" name="danoPerinatal" ng-model='model.danoPerinatal' value="traumatico"> Traumático      
+      <input type="radio" name="danoPerinatal" ng-model='model.danoPerinatal' value="outros"> Outros      
+    </p>
+    <p ng-if='model.temDanoPerinatal == "sim" && model.danoPerinatal == "outros"'>
+      <label>Outro dano perinatal:</label>
+      <input type="text" ng-model="model.outrosDanosPerinatais">
+    </p>    
+  </fieldset>
+  <fieldset>
+    <legend>Exame físico ao nascer</legend>
+    <p>
+      <label>Peso (g):</label>
+      <input type="number" min="0" step="0.01" ng-model='model.exameFisicoAoNascer.peso'>
+    </p>
+    <p>
+      <label>Estatura (cm):</label>
+      <input type="number" min="0" step="0.01" ng-model='model.exameFisicoAoNascer.estatura'>
+    </p>
+    <p>
+      <label>Perímetro cefálico (cm):</label>
+      <input type="number" min="0" step="0.01" ng-model='model.exameFisicoAoNascer.perimetroCefalico'>
+    </p>
+    <p>
+      <label>Perímetro torácico (cm):</label>
+      <input type="number" min="0" step="0.01" ng-model='model.exameFisicoAoNascer.perimetroToracico'>
+    </p>
+    <p>
+      <label>Índice de Apgar:</label>
+      1º min: <input type="number" min="0" ng-model='model.exameFisicoAoNascer.apgar1'>
+      5º min: <input type="number" min="0" ng-model='model.exameFisicoAoNascer.apgar5'>
+      10º min: <input type="number" min="0" ng-model='model.exameFisicoAoNascer.apgar10'>
+    </p>
+    <p>
+      <label>Presença de outras malformações:</label>
+      <input type="radio" name="temMalformacoes" ng-model='model.temMalformacoes' value="sim" > Sim
+      <input type="radio" name="temMalformacoes" ng-model='model.temMalformacoes' value="nao"> Não    
+    </p>
+    <div ng-if='model.temMalformacoes == "sim"'>
+      <table>
+        <tr>
+          <td><input type="checkbox" ng-model='model.malformacoes.ictericia'> Icterícia</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.hidropsia'> Hidropsia</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.petequias'> Petéquias</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" ng-model='model.malformacoes.anemia'> Anemia</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.rms'> Rinite muco-sanguinolenta</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.plaquetopenia'> Plaquetopenia</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" ng-model='model.malformacoes.esplenomegalia'> Esplenomegalia</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.hepatomegalia'> hepatomegalia</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.convulsoes'> Convulsões</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" ng-model='model.malformacoes.ao'> Alterações ósseas</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.lc'> Lesões cutâneas</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.choro'> Choro ao manuseio</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" ng-model='model.malformacoes.pseudoparalisia'> Pseudoparalisia</td>
+          <td><input type="checkbox" ng-model='model.malformacoes.outras'> Outras</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <p ng-if='model.temMalformacoes == "sim" && model.malformacoes.outras'>
+      <label>Outras malformações:</label>
+      <input type="text" ng-model='model.outrasMalformacoes'>
+    </p>
+  </fieldset>
+  <md-content>
+    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button class="md-raised md-primary" ng-click="cadastrar()">{{labelBotaoSalvar}}</md-button>
+    </section>
+  </md-content>
+</form>

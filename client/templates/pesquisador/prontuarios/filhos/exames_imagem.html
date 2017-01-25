@@ -1,0 +1,76 @@
+<fieldset>
+  <legend>Exames de Imagem</legend>
+  <p>
+    <label>Data:</label>
+    <input type="date">
+  </p>
+  <table>
+    <tr>
+      <th>Hb(mg/dl)</th>
+      <th>Ht(%)</th>
+      <th>Leucócitos(mm3)</th>
+      <th>Bastonetes(%)</th>
+      <th>Segmentados(%)</th>
+    </tr>      
+    <tr>
+      <td><input type="number" min="0" step="0.01" ng-model='model.hb'></td>
+      <td><input type="number" min="0" step="0.01" ng-model='model.ht'></td>
+      <td><input type="number" min="0" step="0.01" ng-model='model.leucocitos'></td>
+      <td><input type="number" min="0" step="0.01" ng-model='model.bastonetes'></td>
+      <td><input type="number" min="0" step="0.01" ng-model='model.segmentados'></td>
+    </tr>
+    <tr>
+      <th>Monócitos(%)</th>
+      <th>Linfócitos(%)</th>
+      <th>Plaquetas(%)</th>
+      <th>Glicose(mg/dl)</th>
+    </tr>
+    <tr>
+      <td><input type="number" min="0" step="0.01" ng-model='model.monocitos'></td>
+      <td><input type="number" min="0" step="0.01" ng-model='model.linfocitos'></td>
+      <td><input type="number" min="0" step="0.01" ng-model='model.plaquetas'></td>
+      <td><input type="number" min="0" step="0.01" ng-model='model.glicose'></td>
+    </tr>
+  </table>
+  <p style="text-align: center">
+    <md-button class="md-raised md-primary" ng-click="adicionar()">Adicionar</md-button>
+  </p>  
+</fieldset>
+
+<div ng-show='exames.length > 0'>
+  <hr/>
+
+  <fieldset>
+    <legend>Exames Cadastrados</legend>
+    <table ng-repeat='exame in exames track by $index'>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Hb(mg/dl)</th>
+          <th>Ht(%)</th>
+          <th>Leucócitos(mm3)</th>
+          <th>Bastonetes(%)</th>
+          <th>Segmentados(%)</th>
+          <th>Monócitos(%)</th>
+          <th>Linfócitos(%)</th>
+          <th>Plaquetas(%)</th>
+          <th>Glicose(mg/dl)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{exame.data|date:'dd/MM/yyyy'}}</td>
+          <td>{{exame.hb}}</td>
+          <td>{{exame.ht}}</td>
+          <td>{{exame.leucocitos}}</td>
+          <td>{{exame.bastonetes}}</td>
+          <td>{{exame.segmentados}}</td>
+          <td>{{exame.monocitos}}</td>
+          <td>{{exame.linfocitos}}</td>
+          <td>{{exame.plaquetas}}</td>
+          <td>{{exame.glicose}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+</div>
