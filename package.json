@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "webpack-dashboard -- nodemon --watch server server/index.js",
-    "build": "webpack --progress --colors --config webpack.config.js"
+    "build": "webpack --progress --colors --config webpack.config.js",
+    "test": "mocha"
   },
   "dependencies": {
     "angular": "^1.6.1",
@@ -48,6 +49,7 @@
     "nodemon": "^1.11.0",
     "path": "^0.12.7",
     "style-loader": "^0.13.1",
+    "supertest": "^3.0.0",
     "webpack": "^1.14.0",
     "webpack-dashboard": "^0.2.1",
     "webpack-dev-middleware": "^1.6.1",
