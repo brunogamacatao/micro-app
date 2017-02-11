@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dashboard -- nodemon --watch server server/index.js",
     "build": "webpack --progress --colors --config webpack.config.js",
-    "test": "mocha"
+    "test": "mocha test --recursive"
   },
   "dependencies": {
     "angular": "^1.6.1",
